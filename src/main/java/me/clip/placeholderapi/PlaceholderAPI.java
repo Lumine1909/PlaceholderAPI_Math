@@ -34,6 +34,7 @@ import me.clip.placeholderapi.expansion.manager.LocalExpansionManager;
 import me.clip.placeholderapi.replacer.CharsReplacer;
 import me.clip.placeholderapi.replacer.Replacer;
 import me.clip.placeholderapi.replacer.Replacer.Closure;
+import me.clip.placeholderapi.replacer.linked.LinkedReplacer;
 import me.clip.placeholderapi.util.Msg;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -43,8 +44,8 @@ import org.jetbrains.annotations.NotNull;
 
 public final class PlaceholderAPI {
 
-  private static final Replacer REPLACER_PERCENT = new CharsReplacer(Closure.PERCENT);
-  private static final Replacer REPLACER_BRACKET = new CharsReplacer(Closure.BRACKET);
+  private static final Replacer REPLACER_PERCENT_MATH = new LinkedReplacer(Closure.PERCENT);
+  private static final Replacer REPLACER_BRACKET_MATH = new LinkedReplacer(Closure.BRACKET);
 
   private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("[%]([^%]+)[%]");
   private static final Pattern BRACKET_PLACEHOLDER_PATTERN = Pattern.compile("[{]([^{}]+)[}]");
@@ -68,7 +69,7 @@ public final class PlaceholderAPI {
   @NotNull
   public static String setPlaceholders(final OfflinePlayer player,
       @NotNull final String text) {
-    return REPLACER_PERCENT.apply(text, player,
+    return REPLACER_PERCENT_MATH.apply(text, player,
         PlaceholderAPIPlugin.getInstance().getLocalExpansionManager()::getExpansion);
   }
 
@@ -123,7 +124,7 @@ public final class PlaceholderAPI {
   @NotNull
   public static String setBracketPlaceholders(final OfflinePlayer player,
       @NotNull final String text) {
-    return REPLACER_BRACKET.apply(text, player,
+    return REPLACER_BRACKET_MATH.apply(text, player,
         PlaceholderAPIPlugin.getInstance().getLocalExpansionManager()::getExpansion);
   }
 

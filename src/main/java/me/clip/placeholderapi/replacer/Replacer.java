@@ -35,7 +35,9 @@ public interface Replacer {
 
   enum Closure {
     BRACKET('{', '}'),
-    PERCENT('%', '%');
+    PERCENT('%', '%'),
+    OPERATOR('`', '`'), // Support +-*/ only.
+    NUMBER('^', '^'),;
 
 
     public final char head, tail;

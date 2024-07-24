@@ -3,7 +3,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     `java-library`
     `maven-publish`
-    id("com.github.hierynomus.license") version "0.16.1"
     id("io.github.goooler.shadow") version "8.1.7"
 }
 
@@ -43,19 +42,6 @@ java {
 
     withJavadocJar()
     withSourcesJar()
-}
-
-license {
-    header = rootProject.file("config/headers/main.txt")
-
-    include("**/*.java")
-    mapping("java", "JAVADOC_STYLE")
-
-    encoding = "UTF-8"
-
-    ext {
-        set("year", 2024)
-    }
 }
 
 val javaComponent: SoftwareComponent = components["java"]
